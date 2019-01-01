@@ -1,0 +1,62 @@
+@font-face {
+    font-family: PS2P;
+    src: url('./font/PressStart2P.ttf');
+}
+
+#app, body {
+    margin: 12%;
+    padding: 0;
+    font-family: PS2P;
+    text-align: center;
+}
+
+header {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.grid {
+    margin-top: 60px;
+    margin-bottom: 40px;
+    justify-content: center;
+    display: grid;
+}
+
+.grid .block {
+    background: lightgrey;
+    width: 80px;
+    height: 80px;
+    border: 0.4px solid grey;
+    text-align: center;
+    padding-top: 1px;
+}
+
+button {
+    margin-top: 30px;
+    width: 100px;
+    height: 40px;
+    border: none;
+    outline: 0;
+    cursor: pointer;
+}
+
+button:hover {
+    background: lightgrey;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.info {
+    margin-top: 10px;
+}
+
+.winBlock g rect {
+    fill: dodgerblue;
+}
+
+svg {
+    margin-top: 15px;
+}

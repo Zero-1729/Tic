@@ -1,0 +1,85 @@
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Tic</title>
+
+        <link rel="stylesheet" href="./styles/main.css" />
+        <link rel="shortcut icon" sizes="48x48" href="./assets/logo@50x50.png">
+
+        <meta name="viewport" content="width=device-width" />
+        <meta name="theme-color" content="black" />
+    </head>
+    <body>
+        <div id="app">
+            <header>
+                <h1>Tic Tac Toe</h1>
+            </header>
+
+            <!-- Our 3x3 Grid Game Board -->
+            <div class="grid">
+                <div class="row">
+                    <div v-for="block in row0">
+                        <div class="block" :value=block.id @click="fillBlock('0', block.id)" :pos="getPos(0, block.id, 3)">
+                            <svg :class="{winBlock: combo.includes(block.pos)}" v-if="block.value == 'x'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="2.5 2.5 5 5" width="50" height="50">
+                                <g id="Group"><rect x="2.5" y="2.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="2.5" y="6.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="3.5" y="3.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="3.5" y="5.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="4.5" y="4.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="5.5" y="3.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="5.5" y="5.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="2.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="6.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/></g>
+                            </svg>
+
+                            <svg  :class="{winBlock: combo.includes(block.pos)}" v-else-if="block.value == 'o'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="2.5 12.5 5 5" width="50" height="50">
+                                <g id="Group"><rect x="2.5" y="12.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="2.5" y="16.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="2.5" y="14.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="2.5" y="13.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="3.5" y="16.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="2.5" y="15.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="14.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="15.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="4.5" y="16.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="5.5" y="16.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="12.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="5.5" y="12.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="4.5" y="12.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="13.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="3.5" y="12.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="16.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/></g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div v-for="block in row1">
+                        <div class="block" :value=block.id @click="fillBlock('1', block.id)">
+                            <svg :class="{winBlock: combo.includes(block.pos)}" v-if="block.value == 'x'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="2.5 2.5 5 5" width="50" height="50">
+                                <g id="Group"><rect x="2.5" y="2.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="2.5" y="6.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="3.5" y="3.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="3.5" y="5.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="4.5" y="4.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="5.5" y="3.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="5.5" y="5.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="2.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="6.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/></g>
+                            </svg>
+
+                            <svg :class="{winBlock: combo.includes(block.pos)}" v-else-if="block.value == 'o'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="2.5 12.5 5 5" width="50" height="50">
+                                <g id="Group"><rect x="2.5" y="12.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="2.5" y="16.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="2.5" y="14.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="2.5" y="13.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="3.5" y="16.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="2.5" y="15.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="14.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="15.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="4.5" y="16.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="5.5" y="16.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="12.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="5.5" y="12.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="4.5" y="12.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="13.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="3.5" y="12.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="16.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/></g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div v-for="block in row2">
+                        <div class="block" :value=block.id @click="fillBlock('2', block.id)">
+                            <svg :class="{winBlock: combo.includes(block.pos)}" v-if="block.value == 'x'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="2.5 2.5 5 5" width="50" height="50">
+                                <g id="Group"><rect x="2.5" y="2.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="2.5" y="6.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="3.5" y="3.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="3.5" y="5.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="4.5" y="4.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="5.5" y="3.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="5.5" y="5.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="2.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="6.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/></g>
+                            </svg>
+
+                            <svg :class="{winBlock: combo.includes(block.pos)}" v-else-if="block.value == 'o'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="2.5 12.5 5 5" width="50" height="50">
+                                <g id="Group"><rect x="2.5" y="12.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="2.5" y="16.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="2.5" y="14.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="2.5" y="13.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="3.5" y="16.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="2.5" y="15.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="14.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="15.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="4.5" y="16.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="5.5" y="16.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="12.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="5.5" y="12.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="4.5" y="12.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="13.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="3.5" y="12.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/><rect x="6.5" y="16.5" width="1" height="1" transform="matrix(1,0,0,1,0,0)" id="Rectangle" fill="rgb(70,70,70)"/></g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game info -->
+            <h4 class="info" v-if="current == ''">
+                Game Over!
+            </h4>
+            <h4 class="info" v-else-if="current != ''">
+                Current Player {{current}}
+            </h4>
+
+            <h4 class="result" v-show="winner != null">
+                Player {{winner}} Wins !
+            </h4>
+
+            <div>
+                <button @click="restart()">
+                    Reset Game
+                </button>
+            </div>
+        </div>
+
+        <script src="./lib/vue.js"></script>
+        <!-- Our game logic is implemented purely as `Vuejs` methods -->
+        <!-- There is no actual 'game loop', the entire game is instead tracked after clicking any block -->
+        <script src="./lib/app.js"></script>
+    </body>
+</html>
