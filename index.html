@@ -62,7 +62,7 @@
             <h4 class="info" v-if="current == ''">
                 Game Over!
             </h4>
-            <h4 class="info" v-else-if="current != ''">
+            <h4 class="info" v-else-if="current != '' && winner == null">
                 Current Player {{current}}
             </h4>
 
@@ -79,7 +79,7 @@
 
         <script src="./lib/vue.js"></script>
         <!-- Our game logic is implemented purely as `Vuejs` methods -->
-        <!-- There is no actual 'game loop', the entire game is instead tracked after clicking any block -->
+        <!-- There is no actual 'game loop', the entire game is instead tracked by block clicks -->
         <script src="./lib/app.js"></script>
     </body>
 </html>
